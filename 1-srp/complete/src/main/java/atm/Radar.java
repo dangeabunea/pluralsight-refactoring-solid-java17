@@ -11,7 +11,7 @@ public class Radar {
         this.originLon = originLon;
     }
 
-    public String getAircraftInRange(int range, List<AircraftTarget> allAircraft, boolean latFirst) {
+    public String getAircraftInRange(int range, List<AircraftTarget> allAircraft, CoordinateOutputFormatter formatter) {
         var aircraftInRange = allAircraft
                 .stream()
                 .filter(a -> {
@@ -22,23 +22,6 @@ public class Radar {
                 })
                 .toList();
 
-        var sb = new StringBuilder();
-        if (latFirst) {
-            aircraftInRange.forEach(a -> sb
-                    .append("[")
-                    .append(a.lat())
-                    .append(" ")
-                    .append(a.lon())
-                    .append("] "));
-        } else {
-            aircraftInRange.forEach(a -> sb
-                    .append("[")
-                    .append(a.lon())
-                    .append(" ")
-                    .append(a.lat())
-                    .append("] "));
-        }
-
-        return sb.toString();
+        return formatter.parse(aircraftInRange);
     }
 }

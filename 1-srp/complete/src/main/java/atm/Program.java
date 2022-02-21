@@ -2,6 +2,8 @@ package atm;
 
 import java.util.List;
 
+import static java.lang.System.out;
+
 public class Program {
     public static void main(String[] args) {
         var aircraft = List.of(
@@ -16,9 +18,11 @@ public class Program {
         var radar = new Radar(0, 0);
 
         // lat first
-        System.out.println(radar.getAircraftInRange(6, aircraft, true));
+        var latLonFormatter = new CoordinateOutputFormatter(true);
+        out.println(radar.getAircraftInRange(6, aircraft, latLonFormatter));
 
         // lon first
-        System.out.println(radar.getAircraftInRange(6, aircraft, false));
+        var lonLatFormatter = new CoordinateOutputFormatter(false);
+        out.println(radar.getAircraftInRange(6, aircraft, lonLatFormatter));
     }
 }
