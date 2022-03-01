@@ -31,7 +31,7 @@ Take a minute to look at the code. Can you see why this class breaks the Single 
 
 Create a new class called ```UnitConversionConstants```
 
-> Validation: ```mvn test -Dtest=FileTest#UnitConversionConstantsExists```
+> Validation: ```mvn test -Dtest=FileTest#UnitConversionClassConstantsExists```
 
 ###### Move unit conversion constants to specialized class
 
@@ -43,7 +43,7 @@ Add the two unit conversion constants to the ```UnitConversionConstants``` class
 
 Create a new class called ```PasswordConstants```
 
-> Validation: ```mvn test -Dtest=FileTest#PasswordConstantsExists```
+> Validation: ```mvn test -Dtest=FileTest#PasswordConstantsClassExists```
 
 ###### Move password related constants to specialized class
 
