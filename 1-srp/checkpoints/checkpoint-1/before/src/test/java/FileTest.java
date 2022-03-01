@@ -52,7 +52,7 @@ public class FileTest {
     }
 
     @Test
-    public void ConstantsClassWasRemovedExists(){
+    public void ConstantsClassWasRemoved(){
         var passwordConstants = getClass("Constants");
         assertFalse(passwordConstants.isPresent());
     }
