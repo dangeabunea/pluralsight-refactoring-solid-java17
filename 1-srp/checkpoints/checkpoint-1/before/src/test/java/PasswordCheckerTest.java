@@ -12,5 +12,4 @@ public class PasswordCheckerTest {
         var result = passwordChecker.isPasswordValid(correctPassword);
         assertTrue(result);
     }
-
 }
