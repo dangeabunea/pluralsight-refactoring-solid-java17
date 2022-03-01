@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.function.Try;
 
 
-import java.io.File;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.platform.commons.util.ReflectionUtils.tryToLoadClass;
 
@@ -40,8 +40,20 @@ public class FileTest {
     */
 
     @Test
-    public void UnitConversionConstantsExists(){
+    public void UnitConversionClassConstantsExists(){
         var unitConversionClass = getClass("UnitConversionConstants");
         assertTrue(unitConversionClass.isPresent());
+    }
+
+    @Test
+    public void PasswordConstantsClassExists(){
+        var passwordConstants = getClass("PasswordConstants");
+        assertTrue(passwordConstants.isPresent());
+    }
+
+    @Test
+    public void ConstantsClassWasRemovedExists(){
+        var passwordConstants = getClass("Constants");
+        assertFalse(passwordConstants.isPresent());
     }
 }
