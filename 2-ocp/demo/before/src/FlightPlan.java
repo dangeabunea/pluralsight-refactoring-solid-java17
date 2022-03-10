@@ -5,7 +5,7 @@ public class FlightPlan {
     private String departure;
     private String destination;
     private LocalDateTime departureTime;
-    private LocalDateTime departureDestination;
+    private LocalDateTime destinationTime;
 
 
     public FlightPlan(String callSign, String departure, String destination, LocalDateTime departureTime, LocalDateTime departureDestination) {
@@ -13,7 +13,7 @@ public class FlightPlan {
         this.departure = departure;
         this.destination = destination;
         this.departureTime = departureTime;
-        this.departureDestination = departureDestination;
+        this.destinationTime = departureDestination;
     }
 
     public ValidationResult isValid() {
@@ -39,5 +39,17 @@ public class FlightPlan {
         }
 
         return result;
+    }
+
+    public String getCallSign() {
+        return callSign;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public String getDeparture() {
+        return departure;
     }
 }
