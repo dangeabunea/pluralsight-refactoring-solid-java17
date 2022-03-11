@@ -19,7 +19,7 @@ public class Main {
 
                 // invalid departure
                 new FlightPlan(
-                        "RO1234", null, "Bucharest",
+                        "RO1234", "Paris", null,
                         LocalDateTime.of(2022, 2, 1, 18, 0),
                         LocalDateTime.of(2022, 2, 1, 20, 0)),
 
