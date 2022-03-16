@@ -1,8 +1,8 @@
 public class ThreeDimensionalPoint extends TwoDimensionalPoint{
     private int alt;
 
-    public ThreeDimensionalPoint(int x, int y, int alt) {
-        super(x, y);
+    public ThreeDimensionalPoint(int lat, int lon, int alt) {
+        super(lat, lon);
         this.alt = alt;
     }
 
