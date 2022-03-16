@@ -11,6 +11,6 @@ public class Main {
         // Incorrect result, altitude not taken into consideration
         TwoDimensionalPoint p3 = new ThreeDimensionalPoint(1, 1, 0);
         TwoDimensionalPoint p4 = new ThreeDimensionalPoint(3, 3, 4);
-        System.out.println(calc.calculate(p1, p2));
+        System.out.println(calc.calculate(p3, p4));
     }
 }
