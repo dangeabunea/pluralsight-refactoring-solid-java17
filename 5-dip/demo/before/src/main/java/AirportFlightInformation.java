@@ -1,3 +1,4 @@
+// High level component that adds business value
 public class AirportFlightInformation {
     public void displayFlights() {
         var repo = new FileFlightRepository();

@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+// Low level implementation detail
 public class FileFlightRepository {
     public List<Flight> findAll() {
         var result = new ArrayList<Flight>();
