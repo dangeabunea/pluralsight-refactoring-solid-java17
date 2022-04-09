@@ -6,12 +6,17 @@ import java.util.List;
 
 // Low level implementation detail
 public class FileFlightRepository implements FlightRepository {
+    private String path;
+
+    public FileFlightRepository(String path) {
+        this.path = path;
+    }
+
     public List<Flight> findAll() {
         var result = new ArrayList<Flight>();
 
         try
         {
-            var path = Paths.get("src/main/java/flights.csv");
             var file=new File(path.toString());     //creates a new file instance
             var fr=new FileReader(file);            //reads the file
             var br=new BufferedReader(fr);          //creates a buffering character input stream
