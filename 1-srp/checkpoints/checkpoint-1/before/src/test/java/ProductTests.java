@@ -32,8 +32,9 @@ public class ProductTests {
         if(methodToInvoke.isPresent()){
             double result = (double) methodToInvoke.get().invoke(product);
             assertEquals(990, result, 0.01);
+        } else{
+            fail("Method getDiscountPrice does not exist or is not correct");
         }
-        fail("Method getDiscountPrice does not exist or is not correct");
     }
 
     @Test

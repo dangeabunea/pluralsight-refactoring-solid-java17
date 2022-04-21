@@ -9,6 +9,7 @@ mvn test
 ### Startup script
 
 cd ~/workspace
+mvn clean install -Dmaven.test.skip
 
 ### Tasks
 
