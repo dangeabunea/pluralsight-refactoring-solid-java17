@@ -35,4 +35,17 @@ public class ProductTests {
         }
         fail("Method getDiscountPrice does not exist or is not correct");
     }
+
+    @Test
+    public void getDiscountPriceShouldReturnNormalPriceWhenItIsLessThan1000() throws InvocationTargetException, IllegalAccessException {
+        var product = new Product("Laptop", 900, ProductCategory.Electronics);
+
+        var methodToInvoke = TestHelpers.getMethod("Product", "getDiscountPrice");
+        if(methodToInvoke.isPresent()){
+            double result = (double) methodToInvoke.get().invoke(product);
+            assertEquals(900, result, 0.01);
+        } else{
+            fail("Method getDiscountPrice does not exist or is not correct");
+        }
+    }
 }
