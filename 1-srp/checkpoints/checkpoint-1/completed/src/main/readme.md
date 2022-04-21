@@ -2,9 +2,9 @@
 
 mvn compile
 
-### Run command
+### Run tests command
 
-mvn -q exec:java
+mvn test
 
 ### Startup script
 
@@ -12,56 +12,30 @@ cd ~/workspace
 
 ### Tasks
 
-In this exercise you will look at some code and refactor it for SRP. The focus of this checkpoint is the Constants 
-class which contains all the constants in the application. The constants defined here
-are used by the ```PasswordChecker``` and ```UnitConverter``` classes. This
-indication alone tells us that maybe the general constants class is doing more
-than it should. 
+In this checkpoint you will look at some code and refactor it for SRP. Let's take a look at the ```Product``` class. 
+Now, take a deeper look at the ```getPrice``` getter. Although it's name suggests that it is a getter for the ```price``` 
+property, it's body tells a different story. This getter also performs discounts on the original price in two situations:
+- when the price is greater than $1000.00
+- when it is Christmas Eve
 
->✔️  Instead of a potential god class, a better approach would be to have dedicated
-classes for storing constants, based on their responsibility. 
+The two ```if``` statements are also a clue that this getter is doing more than it should do. If a discount rule changes in the future,
+then the getter will also change. This is a violation of the SRP.
 
-###### Open Constants class.
+>✔️  There are many ways to refactor this code, but in this checkpoint, simply create a new method to handle the price discounts and
+> leave the price getter to return its backing field only
 
-Go to ```src/main/java/Constants.java```
-Take a minute to look at the code. Can you see why this class breaks the Single Responsibility Principle?
+###### Open Product class and create a new method
+
+Go to ```src/main/java/Product.java```
+Create a new method called ```getDiscountPrice``` which should return a double;
+
+> Validation ```mvn test -Dtest=ClassTests#getDiscountPriceMethodExists```
 
 
-###### Create a new class for conversion constants
+###### Move discount code to new method
 
-Create a new class called ```UnitConversionConstants```
-
-> Validation: ```mvn test -Dtest=FileTest#UnitConversionClassConstantsExists```
-
-###### Move unit conversion constants to specialized class
-
-Add the two unit conversion constants to the ```UnitConversionConstants``` class
-
-> Validation ```mvn test -Dtest=CodeTest#UnitConversionConstantsShouldStaticFields```
-
-###### Create a new class for password related constants
-
-Create a new class called ```PasswordConstants```
-
-> Validation: ```mvn test -Dtest=FileTest#PasswordConstantsClassExists```
-
-###### Move password related constants to specialized class
-
-Add the two password related constants to the ```PasswordConstants``` class
-
->Validation: ```mvn test -Dtest=CodeTest#PasswordConstantsShouldStaticFields```
-
-###### Delete Constants class
-
-At this point, we no longer need the ```Constants``` class, so we can remove it. After you remove it,
-you will likely get some compilation errors. Let's go ahead and fix those
-
-> Validation ```mvn test -Dtest=FileTest#ConstantsClassWasRemoved```
-
-###### Refactor code in dependent classes
-
-Instead of using the ```Constants``` class that we just deleted, you need to reference ```UnitConversionConstants```
-and ```PasswordConstants``` in order to access the public static fields. 
+Move all the discount logic to the ```getDiscountPrice``` method and delete that code from the ```getPrice``` getter. At this point,
+the getter should only return the ```price``` field and all the discount logic should be in the new method.
 
 > Validation ```mvn test```
 
