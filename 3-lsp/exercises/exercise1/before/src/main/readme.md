@@ -12,65 +12,60 @@ cd ~/workspace
 mvn clean install -Dmaven.test.skip
 
 ### Run Script
-```mvn exec:java -Dexec.mainClass=Main```
 
-### Tasks
+mvn exec:java -Dexec.mainClass=Main
 
-In this checkpoint, you will look at a violation of the "Tell, Don't Ask" principle.
-This example models the building blocks of a task management system.
-```Task``` is the base class
-```Feature``` extends Task and is concerned with new development activities
-```Bug``` also extends Task and is concerned with handling issues raised by clients
+### Context
 
-Take a look at the ```TaskManager``` class. It has a method that should close all the tasks. However,
-a bug can only be closed if it is verified by the customer. To accomadate this use case, typechecking
-and casting have been used.
+In this exercise, you will look at a violation of the Liskov Substitution Principle.
+You are going to refactor a system that calculates employee time off. In this system:
+```Employee``` is a base class, common to all employee types
+```FullTimeEmployee``` extends ```Employee``` and represents a standard 40 hour a week employee
+```Contractor``` also extends ```Employee``` is used to model professionals that are project based. They do not have
+time off, since they are not hired by the company and thus, do not have all the benefits. 
 
-```
-if (task instanceof Bug) {
-    if (((Bug) task).isVerifiedByCustomer()) {
-        task.close();
-    }
-}
-```
+Take a look at the ```calculateRemainingTimeOff``` method. For a full
+time employee, it has a correct implementation. But for a contractor it returns 0, since contractors have no time off.
 
-This breaks the "Tell, Don't Ask" principle and the LSP because it appears that the type ```Bug``` can not fully
-substitute the type "Task".
+The ```TimeOffCalculator``` class is responsible for calculating the average remaining time off per employee. This is
+useful for HR and Management. Take a close look at the implementation of the ```calculateAvgRemainingTimeOffPerEmployee```
+method. At first glance you would say that it looks ok, but does it return a correct result? 
 
-> ✔️ This is a happy scenario. Actually, we can fix the LSP by removing the type checking. In this checkpoint you are
-> going to apply the "Tell, Dont' Ask" principle to
-> refactor the code.
+Example:
 
-###### Refactor Bug class
+Full time employee 1 has 10 days of time off left.
+Full time employee 2 has 20 days left.
+A contractor has 0.
+When we compute the average remaining time off, the result will be 10 ((20+10+0) / 3). 
 
-Go to ```src/main/java/Bug.java```
-Override the ```close``` method and implement the customer verification logic inside it.
+> ⚠️️ This is not correct. Because contractors have no days off, they should not be part of the statistic. The fact that
+> they can be, will cause this calculator to yield incorrect results. In fact, if we take only people who are eligible for
+> time off, then the average remaining time off per employee is 15 (20 + 10 / 2)
 
-The code should look like this:
 
-```
-@Override
-    public void close() {
-        if(isVerifiedByCustomer()) {
-            super.close();
-        }
-    }
-```
+> ✔️ It turns out that a Contractor can not fully substitute an Employee while keeping the correctness of the program.
+> Let's go ahead and refactor this code for LSP
 
-> Validation ```mvn test -Dtest=BugTests#containsOverrideCloseMethod```
+###### Refactor Main class
 
-###### Remove type checking and casting from the TestManager class
+Go to ```src/main/java/Main.java```
+The first thing we can do is acknowledge that contractrs are not employees, so we have to remove them from the list of 
+employees that gets passed to the ```calculateAvgRemainingTimeOffPerEmployee``` method. Remove this line of code 
+```var contractorDude = new ExternalContractor("Contractor Dude", 30, LocalDate.now().plusYears(1));``` and then
+remove the ```contractorDude``` from the list.
 
-Open the ```TaskManager``` class and modify the ```closeAll``` method to simply call ```close``` on all tasks;
-You will get rid of the type checking and casting;
+> Validation REGEX ```List<Employee> employees = List.of(annaSmith, johnDoe, contractorDude);```
 
-```
-for (var task : tasks) {
-    task.close();
-}
-```
+###### Fix inheritance
 
-> Validation REGEX ```task instanceof Bug```
-> Validation REGEX ```\(\(Bug\).*?task\).isVerifiedByCustomer\(\)```
+Open the ```ExternalContractor.java``` class and remove the inheritance relationship. This class should no longer
+extend ```Employee```. 
+
+> Validation REGEX ```extends Employee```
+
+###### Remove unnecessary method
+
+While at it, make sure to remove the ```calculateRemainingTimeOff``` method from this class
+because it is not needed. A contractor has no time off, so this method is incorrect.
+
 > Validation ```mvn test```
-
