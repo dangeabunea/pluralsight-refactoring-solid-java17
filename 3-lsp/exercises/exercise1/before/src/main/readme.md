@@ -11,6 +11,9 @@ mvn test
 cd ~/workspace
 mvn clean install -Dmaven.test.skip
 
+### Run Script
+```mvn exec:java -Dexec.mainClass=Main```
+
 ### Tasks
 
 In this checkpoint, you will look at a violation of the "Tell, Don't Ask" principle.

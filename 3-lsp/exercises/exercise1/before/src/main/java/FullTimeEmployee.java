@@ -10,7 +10,7 @@ public class FullTimeEmployee extends Employee {
 
         // Allowed time off increases with age
         if (this.getAge() > 40) {
-            maxTimeOffDays = 23;
+            maxTimeOffDays = 22;
         }
 
         return maxTimeOffDays - this.getTimeOffDaysTaken();
