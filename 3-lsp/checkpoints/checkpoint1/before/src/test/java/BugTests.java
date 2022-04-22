@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BugTests {
     @Test
-    public void ContainsOverrideCloseMethod(){
+    public void containsOverrideCloseMethod(){
         var  method = TestHelpers.getMethod("Bug", "close");
         assertTrue(method.isPresent());
 

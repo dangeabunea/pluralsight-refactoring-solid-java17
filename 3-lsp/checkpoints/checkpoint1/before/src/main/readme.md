@@ -54,7 +54,7 @@ The code should look like this:
     }
 ```
 
-> Validation ```mvn test -Dtest=ClassTests#getDiscountPriceMethodExists```
+> Validation ```mvn test -Dtest=BugTests#containsOverrideCloseMethod```
 
 ###### Remove type checking and casting from the TestManager class
 
@@ -67,5 +67,7 @@ for (var task : tasks) {
 }
 ```
 
+> Validation REGEX ```task instanceof Bug```
+> Validation REGEX ```\(\(Bug\).*?task\).isVerifiedByCustomer\(\)```
 > Validation ```mvn test```
 
