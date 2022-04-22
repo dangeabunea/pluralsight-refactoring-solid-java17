@@ -17,7 +17,7 @@ public class TestHelpers {
         final Optional<Class<?>> maybeClass = getClass(className);
         final Class<?> classDefinition = maybeClass.get();
 
-        var field = Arrays.stream(classDefinition.getFields())
+        var field = Arrays.stream(classDefinition.getDeclaredFields())
                 .filter(f -> f.getName().equals(fieldName))
                 .findFirst();
         return field;
