@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ExternalContractorTests {
     @Test
@@ -18,5 +19,13 @@ public class ExternalContractorTests {
         var remainingTimeOffMethod = TestHelpers.getMethod("ExternalContractor", "calculateRemainingTimeOff");
 
         assertFalse(remainingTimeOffMethod.isPresent());
+    }
+
+    @Test void shouldHaveNameAndAgeFields(){
+        var nameField = TestHelpers.getField("ExternalContractor", "name");
+        var ageField = TestHelpers.getField("ExternalContractor", "age");
+
+        assertTrue(nameField.isPresent());
+        assertTrue(ageField.isPresent());
     }
 }

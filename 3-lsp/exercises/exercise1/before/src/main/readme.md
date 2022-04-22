@@ -13,7 +13,7 @@ mvn clean install -Dmaven.test.skip
 
 ### Run Script
 
-mvn exec:java -Dexec.mainClass=Main
+mvn install  exec:java -Dexec.mainClass=Main -Dmaven.test.skip
 
 ### Context
 
@@ -54,7 +54,7 @@ employees that gets passed to the ```calculateAvgRemainingTimeOffPerEmployee``` 
 ```var contractorDude = new ExternalContractor("Contractor Dude", 30, LocalDate.now().plusYears(1));``` and then
 remove the ```contractorDude``` from the list.
 
-> Validation REGEX ```List<Employee> employees = List.of(annaSmith, johnDoe, contractorDude);```
+> Validation REGEX ```List<Employee> employees = List.of(annaSmith, johnDoe, contractorDude)```
 
 ###### Fix inheritance
 
@@ -62,6 +62,32 @@ Open the ```ExternalContractor.java``` class and remove the inheritance relation
 extend ```Employee```. 
 
 > Validation REGEX ```extends Employee```
+
+###### Remove call to the base class constructor
+
+Since this class does not extend ```Employee```, we can not call it's base constructor. So, remove this line of code
+```super(name, age);```
+
+> Validation REGEX ```super(name, age)```
+
+###### Add name and age fields and getters
+
+Because we do not extend ```Employee```, you need to add the name and age fields and initialize them from the
+constructor. Add a String field called ```name``` and one integer field called ```age```. Then, initialize them using
+the constructor arguments.
+
+```
+    private LocalDate contractExpirationDate;
+    private String name;
+    private int age;
+
+    public ExternalContractor(String name, int age, LocalDate contractExpirationDate) {
+        this.contractExpirationDate = contractExpirationDate;
+        this.name = name;
+        this.age = age;
+    }
+```
+> Validation ```mvn test -Dtest=ExternalContractorTests#shouldHaveNameAndAgeFields```
 
 ###### Remove unnecessary method
 
