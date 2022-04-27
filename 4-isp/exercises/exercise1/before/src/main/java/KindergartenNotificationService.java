@@ -1,5 +1,5 @@
 // Parents usually need to be alerted via text and internal application
-public class KindergardenNotificationService implements NotificationService {
+public class KindergartenNotificationService implements NotificationService {
     private String internalApiUrl = "https://mykindergarden.com/api/v1/broadcast";
 
     @Override
