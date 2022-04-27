@@ -93,6 +93,22 @@ Open  ```KindergartenNotificationService.java``` class.
    2. InternalApplicationNotificationService
 2. Remove the unused methods (the ones with an empty body)
 
+```
+public class KindergartenNotificationService implements TextNotificationService, InternalApplicationNotificationService {
+    private String internalApiUrl = "https://mykindergarden.com/api/v1/broadcast";
+
+    @Override
+    public void sendTextMessage(String phoneNb, String text) {
+        System.out.println("Sending to " + phoneNb + " message " + text);
+    }
+
+    @Override
+    public void sendInInternalApplication(String text) {
+        System.out.println("Sending to " + internalApiUrl + " message " + text);
+    }
+}
+```
+
 > Validation ```mvn test -Dtest=KindergartenNotificationServiceTests```
 
 ###### Refactor Company notification service
@@ -103,6 +119,22 @@ Open  ```CompanyNotificationService.java``` class.
     1. EmailNotificationService
     2. SlackNotificationService
 2. Remove the unused methods (the ones with an empty body)
+
+```
+public class CompanyNotificationService implements SlackNotificationService, EmailNotificationService {
+    @Override
+    public void sendEmail(String to, String text) {
+        System.out.println("Sending to " + to + " message " + text);
+    }
+
+
+    @Override
+    public void sendSlackMessage(String slackUser, String text) {
+        System.out.println("Sending to " + slackUser + " message " + text);
+    }
+}
+```
+
 
 > Validation ```mvn test -Dtest=CompanyNotificationServiceTests```
 
