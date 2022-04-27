@@ -42,7 +42,8 @@ public interface TextNotificationService {
 }
 ```
 
-> Validation ```mvn test -Dtest=PaymentServiceTests#payUsingPayPalNotExists```
+> Validation ```mvn test -Dtest=FileTests#textNotificationServiceInterfaceExists```
+> Validation ```mvn test -Dtest=FileTests#textNotificationServiceInterfaceHasMethod```
 
 ###### Create new interface for email notifications
 
@@ -55,6 +56,7 @@ public interface EmailNotificationService {
 ```
 
 > Validation ```mvn test -Dtest=FileTests#emailNotificationServiceInterfaceExists```
+> Validation ```mvn test -Dtest=FileTests#emailNotificationServiceInterfaceHasMethod```
 
 ###### Create new interface for Slack notifications
 
@@ -66,7 +68,8 @@ public interface SlackNotificationService {
 }
 ```
 
-> Validation ```mvn test -Dtest=FileTests#slackNotificationServiceExists```
+> Validation ```mvn test -Dtest=FileTests#slackNotificationServiceInterfaceExists```
+> Validation ```mvn test -Dtest=FileTests#slackNotificationServiceInterfaceHasMethod```
 
 ###### Create new interface for internal application notifications
 
@@ -78,7 +81,8 @@ public interface InternalApplicationNotificationService {
 }
 ```
 
-> Validation ```mvn test -Dtest=FileTests#internalApplicationNotificationServiceExists```
+> Validation ```mvn test -Dtest=FileTests#internalApplicationNotificationServiceInterfaceExists```
+> Validation ```mvn test -Dtest=FileTests#internalApplicationNotificationServiceInterfaceHasMethod```
 
 ###### Refactor Kindergarten notification service
 
