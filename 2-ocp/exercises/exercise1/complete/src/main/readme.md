@@ -79,8 +79,6 @@ from the ```PointInsideAreasCalculator.java``` as a reference. The final code sh
     }
 ```
 
-> Validation ```mvn test -Dtest=CircleTests```
-
 ###### Implement logic for determining if a coordinate is within a rectangle
 
 Go to ```src/main/java/Rectangle.java``` and add implement the ```isPointInsideArea``` method. You can use the implementation
@@ -95,8 +93,6 @@ from the ```PointInsideAreasCalculator.java``` as a reference. The final code sh
                 y <= getMaxY();
     }
 ```
-
-> Validation ```mvn test -Dtest=RectangleTests```
 
 ###### Refactor ```PointInsideAreaCalculator``` and make it respect the OCP
 
