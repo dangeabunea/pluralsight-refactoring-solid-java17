@@ -25,7 +25,7 @@ you will notice that the method throws an exception.
 
 ###### Refactor PaymentService interface
 
-Go to ```src/main/java/PaymentService.java``` and delete the ```payUsingPayPal``` method.
+Go to ```src/main/java/PaymentService.java``` and delete the ```payUsingPayPal()``` method.
 We will move it to a new interface later.
 
 > Validation ```mvn test -Dtest=PaymentServiceTests#payUsingPayPalNotExists```
@@ -38,7 +38,7 @@ Open the ```OnlineStorePaymentService``` and remove the method that throws the e
 
 ###### Create new interface for Pay Pal payments
 
-Create a new interface called ```PayPalPaymentServicejava``` and add the following method to it ```payUsingPayPal```. It is the method we removed
+Create a new interface called ```PayPalPaymentService.java``` and add the following method to it ```payUsingPayPal```. It is the method we removed
 from the original interface during the refactoring process.
 
 ```

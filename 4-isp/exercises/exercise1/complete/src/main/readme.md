@@ -17,7 +17,7 @@ In this exercise, you will see an interface that violates the ISP, and then you 
 respect this principle.
 
 Let's start by taking a look at the ```NotificationService``` interface. It has 4 methods that deal with various notification
-scenarios. At first glance, this interface seems ok. Until we look at the overall context, the classes that implement it.
+scenarios. At first glance, this interface seems ok. Unit we look at the overall context, the classes that implement it.
 There are 2 classes that implement this interface:
 - ```KindergartenNotificationService```
 - ```CompanyNotificationService```
