@@ -13,39 +13,40 @@ mvn clean install -Dmaven.test.skip
 
 ### Tasks
 
-In this checkpoint, you will see an interface that violates the ISP, and then you will refactor the code to
-respect this principle.
+In this checkpoint, you will refactor a high level component (EmployeeIncomeCalculator) that depends on a low level
+component (EmployeeRestApiService). 
 
-Take a look at the ```PaymentService``` interface. It has three methods that manages online payments
+Open ```EmployeeIncomeCalculator.java```. You will see that this class depends on the ```EmployeeRestApiService.java```.
+The dependency is declared in the constructor, which is a good practice. But instead of using abstractions, a concrete class
+is passed as a parameter.
 
-Then, take a look at the ```OnlineStorePaymentService``` class. If you take a close look at the ```payUsingPayPal``` method,
-you will notice that the method throws an exception. 
 
-> ✔️ This is a clear indication that maybe the interface is too fat.  Let's go ahead and make the interface lean.
+> ✔️ Although this is not the worst implementation, it is still not a good practice because there is coupling between a
+> business logic class and an infrastructure class. Let's go ahead and apply the DIP.
 
-###### Refactor PaymentService interface
+###### Extract interface for the employee API service
 
-Go to ```src/main/java/PaymentService.java``` and delete the ```payUsingPayPal()``` method.
-We will move it to a new interface later.
+Create a new interface called ```EmployeeApi.java```. This interface will become our abstraction. 
 
-> Validation ```mvn test -Dtest=PaymentServiceTests#payUsingPayPalNotExists```
+> Validation ```mvn test -Dtest=FileTest#shouldCreateEmployeeApiInterface```
 
-###### Refactor OnlineStorePaymentService class
+###### Add method to interface
 
-Open the ```OnlineStorePaymentService``` and remove the method that throws the exception: ```payUsingPayPal```
+Open the ```EmployeeApiService.java``` interface and add the ```List<Employee> findAll()``` method.
 
-> Validation ```mvn test -Dtest=PaymentServiceTests```
+> Validation REGEX ```findAll()```
 
-###### Create new interface for Pay Pal payments
+###### Make low level class implement interface
 
-Create a new interface called ```PayPalPaymentService.java``` and add the following method to it ```payUsingPayPal```. It is the method we removed
-from the original interface during the refactoring process.
+Open ```EmployeeRestApiService.java``` and make it implement the ```EmployeeApi``` interface.
 
-```
-public interface PayPalPaymentService {
-    void payUsingPayPal(double amount, String accountName);
-}
-```
+> Validation REGEX ```implements EmployeeApi()```
 
+###### Make high level class depend on an abstraction
+
+Open ```EmployeeIncomeCalculator.java``` and change the type of its dependency. The ```employeeApiService``` field can now
+use the interface type ```EmployeeApi`` instead of a concrete class type. Make sure to change that in the constructor as 
+well. The parameter needs to be of type ```EmployeeApi```
+
+> Validation REGEX ```EmployeeApi```
 > Validation ```mvn test```
-
