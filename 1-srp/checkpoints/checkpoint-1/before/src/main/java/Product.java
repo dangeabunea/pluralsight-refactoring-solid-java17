@@ -24,10 +24,15 @@ public class Product {
     }
 
     public double getPrice() {
+        return price;
+    }
+
+    public double getDiscountPrice() {
         // General discount
         if (price > 1000) {
             return price * 0.9;
         }
+
         // Christmas discount
         if (LocalDate.now().getMonth() == Month.DECEMBER &&
                 LocalDate.now().getDayOfMonth() == 24) {
